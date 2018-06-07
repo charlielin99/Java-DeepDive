@@ -1,2 +1,2 @@
 # Java-DeepDive
-Diving into Algos/Data Structures
+Implementation of all common Algorithms & Data Structures

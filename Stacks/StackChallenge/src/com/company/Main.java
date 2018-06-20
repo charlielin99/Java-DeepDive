@@ -17,7 +17,28 @@ public class Main {
     }
 
     public static boolean checkForPalindrome(String string) {
-        return false;
+
+        String string = string.toLowerCase()
+        
+        LinkedList<Character> stack = new LinkedList<>();
+        StringBuilder stringNoPunctuation = new StringBuilder(string.length);
+
+        for(int i=0;i<string.length;i++){
+            char mychar = string.charAt(i);
+            if (mychar >= 'a' && mychar <= 'z'){ //checks if character is a letter a-z
+                stack.push(mychar);
+                stringNoPunctuation.append(mychar);
+            }
+        }
+
+        StringBuilder reversedString = new StringBuilder(stack.size());
+
+        while(!stack.isEmpty()){
+            reversedString.append(stack.pop());
+        }
+
+        return stringNoPunctuation.toString().equals(reversedString.toString());
+
     }
 
 }

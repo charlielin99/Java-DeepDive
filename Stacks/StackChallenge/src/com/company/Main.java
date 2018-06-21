@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.LinkedList;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -18,13 +20,13 @@ public class Main {
 
     public static boolean checkForPalindrome(String string) {
 
-        String string = string.toLowerCase()
+        String string1 = string.toLowerCase();
         
         LinkedList<Character> stack = new LinkedList<>();
-        StringBuilder stringNoPunctuation = new StringBuilder(string.length);
+        StringBuilder stringNoPunctuation = new StringBuilder(string1.length());
 
-        for(int i=0;i<string.length;i++){
-            char mychar = string.charAt(i);
+        for(int i=0;i<string1.length();i++){
+            char mychar = string1.charAt(i);
             if (mychar >= 'a' && mychar <= 'z'){ //checks if character is a letter a-z
                 stack.push(mychar);
                 stringNoPunctuation.append(mychar);

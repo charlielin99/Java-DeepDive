@@ -18,22 +18,19 @@ public class Solution {
     }
 
     public static LinkedListNode reverse(LinkedListNode headOfList) {
-        
+
+        // reverse the linked list in place
         LinkedListNode currentNode = headOfList;
         LinkedListNode previousNode = null;
         LinkedListNode nextNode = null;
         
         while (currentNode != null){
-            
             nextNode = currentNode.next;
-            previousNode = currentNode;
+            currentNode.next = previousNode;
             
+            previousNode = currentNode;
             currentNode = nextNode;
-            nextNode = previousNode;
         }
-
-        // reverse the linked list in place
-        
 
         return previousNode;
     }

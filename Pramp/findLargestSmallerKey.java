@@ -40,7 +40,7 @@ class Solution {
       int bestSoFar = -1;
       
       while (root != null){
-        if (root.key > num){
+        if (root.key >= num){
           root = root.left;
         } else if (root.key < num){
           bestSoFar = root.key;

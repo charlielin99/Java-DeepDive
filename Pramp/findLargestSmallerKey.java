@@ -39,11 +39,11 @@ class Solution {
       //}
       int bestSoFar = -1;
       
-      while (root.right!= null || root.left!=null){
+      while (root != null){
         if (root.key > num){
           root = root.left;
         } else if (root.key < num){
-          bestSoFar = root.right.key;
+          bestSoFar = root.key;
           root = root.right;
         }
       }

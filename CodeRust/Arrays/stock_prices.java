@@ -13,22 +13,25 @@ class Tuple<X, Y> {
   } 
 }
 */
-    int minPrice = array[0];
-    int maxProfit = array[1] - array[0];
-    Tuple<Integer, Integer> myTuple = new Tuple<Integer, Integer>(array[0], array[1]);
+    int minPrice = Math.min(array[0], array[1]);
+    int maxPrice = Math.max(array[0], array[1]);
+    int maxProfit = maxPrice - minPrice;
+    
     
     for (int i=1; i<array.length; i++){
       int currentPrice = array[i];
       int potentialProfit = currentPrice - minPrice;
       
       minPrice = Math.min(minPrice, currentPrice);
+      
       if (potentialProfit > maxProfit){
         maxProfit = potentialProfit;
-        myTuple.x = minPrice;
-        myTuple.y = currentPrice;
+        maxPrice = currentPrice;
       }
     }
     
-    return myTuple;
+    return new Tuple<Integer, Integer>(minPrice, maxPrice);
+    
+    
   }
 }  

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/isStringRotatable.iml" filepath="$PROJECT_DIR$/isStringRotatable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/longestCommonSubsequence.iml" filepath="$PROJECT_DIR$/longestCommonSubsequence.iml" />
     </modules>
   </component>
 </project>

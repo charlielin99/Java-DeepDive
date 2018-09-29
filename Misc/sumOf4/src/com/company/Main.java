@@ -5,61 +5,57 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-	    int[] arr = new int[5];
-	    arr[0] = 7;
-        arr[1] = 5;
-        arr[2] = 3;
-        arr[3] = 11;
-        arr[4] = 13;
+        int[] arr = new int[5];
+        arr[0] = 0;
+        arr[1] = 1;
+        arr[2] = 2;
+        arr[3] = 3;
+        arr[4] = 7;
 
-        System.out.println(isFourSum(arr, 26));
-
-        /*
-        int[] arr2 = new int[2];
-        arr2[0] = 1;
-        arr2[1] = 2;
-
-        System.out.println(isFourSum2(arr2, 6));
-        */
+        System.out.println(isFourSum(arr, 6));
 
     }
 
-    static class Pair{
+    static class Pair {
         private int start;
         private int end;
 
-        Pair(int start, int end){
+        Pair(int start, int end) {
             this.start = start;
             this.end = end;
         }
 
-        int getStart(){
+        int getStart() {
             return this.start;
         }
 
-        int getEnd(){
+        int getEnd() {
             return this.end;
+        }
+
+        boolean checkEqual(Pair other) {
+            return this.start == other.start || this.end == other.end || this.end == other.start || this.start == other.end;
         }
     }
 
-    public static boolean isFourSum(int[] arr, int target){
-        HashMap<Integer, List<Pair>> map = new HashMap<Integer, List<Pair>>();
+    public static boolean isFourSum(int[] arr, int target) {
+        HashMap<Integer, HashSet<Pair>> map = new HashMap<Integer, HashSet<Pair>>();
 
-        for (int i=0; i<arr.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             for (int j = i + 1; j < arr.length; j++) {
                 int sum = arr[i] + arr[j];
-                if (map.containsKey(target - sum)){
-                    List<Pair> possibilities = map.get(target-sum);
-                    // by placing everything of list into hashset and then comparing size
-                    // I can tell if there were any repeated elements
-                    Set<Pair> set = new HashSet<Pair>(possibilities);
-                    if (set.size() == possibilities.size()){
-                        return true;
+                if (map.containsKey(target - sum)) {
+                    HashSet<Pair> possibilities = map.get(target - sum);
+                    for (Pair poss : possibilities) {
+                        if (!poss.checkEqual(new Pair(i, j))) {
+                            //System.out.println(poss.start + " " + poss.end + " " + i + " " + j + ", " + arr[poss.start] + " " + arr[poss.end] + " " + arr[i] + " " + arr[j]);
+                            return true;
+                        }
                     }
                 } else {
-                    map.put(target-sum, new ArrayList<Pair>());
+                    map.put(target - sum, new HashSet<Pair>());
                 }
-                map.get(target-sum).add(new Pair(i, j));
+                map.get(target - sum).add(new Pair(i, j));
             }
         }
 

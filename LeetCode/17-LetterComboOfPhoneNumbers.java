@@ -1,4 +1,7 @@
 /*
+time: o(3^n) if longest mapping is 3 (could also be 4)
+space: o(n)
+
 method combine is to add new letters to old list, using 2 for-loop.
 
 for example:

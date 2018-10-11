@@ -7,53 +7,45 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
-
 class Solution {
+/*The basic idea is here:
+Say we have 2 arrays, PRE and IN.
+Preorder traversing implies that PRE[0] is the root node.
+Then we can find this PRE[0] in IN, say it's IN[5].
+Now we know that IN[5] is root, so we know that IN[0] - IN[4] is on the left side, IN[6] to the end is on the right side.
+Recursively doing this on subarrays, we can build a tree out of it :)
 
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        return helper(0, 0, inorder.length - 1, preorder, inorder);
+Space: O(N)
+Because each node we create a helper(), the recursion stack will cost O(N)
+
+Time: O(N log N) for a balanced tree, O(N^2) for a skew tree
+As mentioned above, the helper() runs O(N) time, and for each helper(), there is a for-loop to search the inorder index.
+
+For a balanced tree, the range of the search will be reduced by half each time, so the search costs O(log n)
+Therefore the time is O(N) * O(log N) = O(N log N)
+
+For a skew tree, the range of the search will only be reduced by 1, so the search still costs O(N)
+Therefore the time is O(N) * O(N) = O(N^2)
+
+*/
+
+ public TreeNode buildTree(int[] preorder, int[] inorder) {
+    if(preorder.length!=inorder.length) return null;
+    return buildTree(preorder, 0, preorder.length-1, inorder, 0, inorder.length-1);
+}
+
+public TreeNode buildTree(int [] preorder, int preLow, int preHigh, int[] inorder, int inLow, int inHigh){
+    if(preLow>preHigh || inLow>inHigh) return null;
+    TreeNode root = new TreeNode(preorder[preLow]);
+   
+    int inorderRoot = inLow;
+    for(int i=inLow;i<=inHigh;i++){
+        if(inorder[i]==root.val){ inorderRoot=i; break; }
     }
-
-    public TreeNode helper(int preStart, int inStart, int inEnd, int[] preorder, int[] inorder) {
-        if (preStart > preorder.length - 1 || inStart > inEnd) {
-            return null;
-        }
-        TreeNode root = new TreeNode(preorder[preStart]);
-        int inIndex = 0; // Index of current root in inorder
-        for (int i = inStart; i <= inEnd; i++) {
-            if (inorder[i] == root.val) {
-                inIndex = i;
-            }
-        }
-        root.left = helper(preStart + 1, inStart, inIndex - 1, preorder, inorder);
-        root.right = helper(preStart + inIndex - inStart + 1, inIndex + 1, inEnd, preorder, inorder);
-        return root;
-    }
-
-
-
-    //CACHEING
-
-    /*
-     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        HashMap<Integer,Integer> mapIndex = new HashMap<>(inorder.length);
-        for (int i = 0; i < inorder.length; i++) {
-            mapIndex.put(inorder[i],i);
-        }
-        return buildFromPreorderInorder(preorder,0,inorder,0,inorder.length -1, mapIndex);
-    }
-
-    // id - inStart is the left sub tree's size, end - id is the right sub tree's size
-    private TreeNode buildFromPreorderInorder(int[] preorder,int preId, int[] inorder, int inStart, int inEnd, Map<Integer,Integer> map )
-    {
-       if(inStart > inEnd)return null;
-        int val = preorder[preId];
-        int id = map.get(val);  // the divider's index
-        TreeNode root = new TreeNode(val);
-        root.left = buildFromPreorderInorder(preorder,preId +1, inorder, inStart, id -1, map);
-        root.right = buildFromPreorderInorder(preorder,preId + id - inStart +1 , inorder, id +1, inEnd, map);
-
-        return root;
-    }
-    */
+   
+    int leftTreeLen = inorderRoot-inLow;
+    root.left = buildTree(preorder, preLow+1, preLow+leftTreeLen, inorder, inLow, inorderRoot-1);
+    root.right = buildTree(preorder, preLow+leftTreeLen+1, preHigh, inorder, inorderRoot+1, preHigh);       
+    return root;        
+}
 }

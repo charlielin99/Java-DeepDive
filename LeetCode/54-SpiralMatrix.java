@@ -1,8 +1,7 @@
 /*This is a very simple and easy to understand solution. I traverse right and increment rowBegin, then traverse down and decrement colEnd, then I traverse left and decrement rowEnd, and finally I traverse up and increment colBegin.
 
-The only tricky part is that when I traverse left or up I have to check whether the row or col still exists to prevent duplicates. If anyone can do the same thing without that check, please let me know!
-
-Any comments greatly appreciated.
+The only tricky part is that when I traverse left or up I have to check whether the row or col still exists to prevent duplicates.
+time: o(m*n)
 */
 
 public class Solution {

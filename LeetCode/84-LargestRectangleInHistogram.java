@@ -11,6 +11,9 @@ We traverse all bars from left to right, maintain a stack of bars. Every bar is 
 3) If the stack is not empty, then one by one remove all bars from stack and do step 2.b for every removed bar.
 */
 
+// o(n) time
+// o(n) space
+
 public class Solution {
     public int largestRectangleArea(int[] height) {
         int len = height.length;

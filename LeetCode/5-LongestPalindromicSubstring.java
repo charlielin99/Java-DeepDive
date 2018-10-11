@@ -1,3 +1,6 @@
+// time o(n^2)
+// space o(1)
+
 class Solution {
     public String longestPalindrome(String s) {
         

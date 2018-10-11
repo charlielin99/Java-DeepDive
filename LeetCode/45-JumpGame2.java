@@ -1,4 +1,6 @@
 public class Solution {
+    //time: o(n)
+    // greedy solution
 public int jump(int[] nums) {
     // If nums.length < 2, means that we do not
     // need to move at all.

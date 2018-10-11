@@ -7,24 +7,36 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
-public class Solution {
+/*
+1. Create a list for each level and apply postorder traversal for all nodes at that level
+2. Do not rely on level to get the list for that level
+3. When recursing, move list for current level from tail to head of the outer list
+4. When backtracking, move list for current level from head to tail of the outer list
+Complexity: Time - O(n), Space - O(height)
+*/
+class Solution {
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        List<List<Integer>> wrapList = new LinkedList<List<Integer>>();
-        
-        if(root == null) return wrapList;
-        
-        queue.offer(root);
-        while(!queue.isEmpty()){
-            int levelNum = queue.size();
-            List<Integer> subList = new LinkedList<Integer>();
-            for(int i=0; i<levelNum; i++) {
-                if(queue.peek().left != null) queue.offer(queue.peek().left);
-                if(queue.peek().right != null) queue.offer(queue.peek().right);
-                subList.add(queue.poll().val);
-            }
-            wrapList.add(0, subList);
+        LinkedList<List<Integer>> result = new LinkedList<>(); // LinkedList - addFirst(), add(), remove() and removeLast()
+        recursiveLevelOrderBottom(root, 0, result);
+        return result;
+    }
+    
+    private void recursiveLevelOrderBottom(TreeNode root, int height, LinkedList<List<Integer>> result) {
+        if (root == null) { // Base case
+            return;
         }
-        return wrapList;
+        
+        if (height == result.size()) { // Create a new list for current level
+            result.addFirst(new ArrayList<>());
+        } else if (height < result.size()) { // Move the list for current level from tail to head
+            result.addFirst(result.removeLast());
+        }
+        
+        /* Postorder traversal */
+        recursiveLevelOrderBottom(root.left, height + 1, result); // Recursive steps
+        recursiveLevelOrderBottom(root.right, height + 1, result);
+        // Add root value to the list for current level, then move it from head to tail since we are about to backtrack
+        result.peek().add(root.val);
+        result.add(result.remove());
     }
 }

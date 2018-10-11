@@ -1,4 +1,7 @@
 class Solution {
+    //time o(n*m)
+    //space o(n*m)
+    
     public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
         if (image[sr][sc] != newColor){
             dfs(image, sr, sc, image[sr][sc], newColor);

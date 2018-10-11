@@ -12,6 +12,15 @@ For the kth level:
 minpath[i] = min( minpath[i], minpath[i+1]) + triangle[k][i]; 
 */
 
+/*
+ In fact, for a triangle with n layers, there are 2^(n-1) possible paths as can be shown by induction. one has to traverse all the branches to find the minimum sum path means the algorithm has to be of O(2^(n)) time complexity.
+ 
+ By using bottom up DP:
+ Time: O(n^2)
+ Space: O(n)
+
+*/
+
 class Solution {
 public int minimumTotal(List<List<Integer>> triangle) {
     int[] A = new int[triangle.size()+1];

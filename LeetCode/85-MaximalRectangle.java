@@ -17,6 +17,10 @@ Then update the array. We scan the second row, when the matrix[1][i] is 0, set t
 Apply the same method until we scan the whole matrix. the last height arrays is 2 4 2 2 0 4, so the max area has been found as 2 * 4 = 8.
 
 Then reason we scan the whole matrix is that the maximum value may appear in any row of the height.
+
+time: o(n*m)
+space: o(n) for stack
+
 */
 
 public class Solution {

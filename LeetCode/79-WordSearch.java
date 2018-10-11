@@ -1,6 +1,7 @@
 public class Solution {
     
-    // O(4^n)
+    // The search method breaks when index == word.length(), so the time complexity 
+    // should be n^2 * 3^word.length(). (It's 3, not 4, because we can't go back.)
     
     static boolean[][] visited;
     public boolean exist(char[][] board, String word) {

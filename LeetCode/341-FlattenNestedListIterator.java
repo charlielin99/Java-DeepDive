@@ -17,6 +17,10 @@
  */
 public class NestedIterator implements Iterator<Integer> {
     
+    /*
+    In the constructor, we push all the nestedList into the stack from back to front, so when we pop the stack, it returns the very first element. Second, in the hasNext() function, we peek the first element in stack currently, and if it is an Integer, we will return true and pop the element. If it is a list, we will further flatten it. This is iterative version of flatting the nested list. Again, we need to iterate from the back to front of the list.
+    */
+    
     private Deque<NestedInteger> stack;
 
     public NestedIterator(List<NestedInteger> nestedList) {

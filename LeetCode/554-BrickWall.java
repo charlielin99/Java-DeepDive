@@ -1,4 +1,10 @@
-/*We want to cut from the edge of the most common location among all the levels, hence using a map to record the locations and their corresponding occurrence.*/
+/*
+We want to cut from the edge of the most common location among all the levels, hence using a map to record the locations and their corresponding occurrence.
+
+time: o(n*m)
+space: o(n)
+    
+*/
 
 public class Solution {
     public int leastBricks(List<List<Integer>> wall) {

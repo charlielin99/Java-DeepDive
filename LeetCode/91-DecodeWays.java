@@ -7,6 +7,9 @@ public class Solution {
       In the end, dp[n] will be the end result.
     */
     
+    //time: o(n)
+    //space: o(n)
+    
     public int numDecodings(String s) {
         if(s == null || s.length() == 0) {
             return 0;

@@ -1,36 +1,43 @@
 public class Solution {
+    // time o(n)
+    // space o(n)
+    // stack based solution
     public String decodeString(String s) {
-        String res = "";
-        Stack<Integer> countStack = new Stack<>();
-        Stack<String> resStack = new Stack<>();
-        int idx = 0;
-        while (idx < s.length()) {
-            if (Character.isDigit(s.charAt(idx))) {
-                int count = 0;
-                while (Character.isDigit(s.charAt(idx))) {
-                    count = 10 * count + (s.charAt(idx) - '0');
-                    idx++;
-                }
-                countStack.push(count);
-            }
-            else if (s.charAt(idx) == '[') {
-                resStack.push(res);
-                res = "";
-                idx++;
-            }
-            else if (s.charAt(idx) == ']') {
-                StringBuilder temp = new StringBuilder (resStack.pop());
-                int repeatTimes = countStack.pop();
-                for (int i = 0; i < repeatTimes; i++) {
-                    temp.append(res);
-                }
-                res = temp.toString();
-                idx++;
-            }
-            else {
-                res += s.charAt(idx++);
-            }
-        }
-        return res;
+    if (s == null || s.length() == 0) {
+        return s;
     }
+
+    Stack<Integer> countStack = new Stack<>();
+    Stack<String> resultStack = new Stack<>();
+    char[] strArr = s.toCharArray();
+    int count = 0;
+    String curResult = "";
+    for (int i = 0; i < s.length(); i++) {
+        //calculate repeat number
+        if (Character.isDigit(strArr[i])) {
+            count = count * 10 + (strArr[i] - '0');
+        }
+        //push previous decoded string into stack
+        else if (strArr[i] == '[') {
+            countStack.push(count);
+            resultStack.push(curResult);
+            count = 0;
+            curResult = "";
+        }
+        //start to decode current string
+        else if (strArr[i] == ']') {
+            int repeat = countStack.pop();
+            StringBuilder temp = new StringBuilder(resultStack.pop());
+            for (int j = 0; j < repeat; j++) {
+                temp.append(curResult);
+            }
+            curResult = temp.toString();
+        }
+        //normal character, concat to current string, preparing for decoding
+        else {
+            curResult += strArr[i];
+        }
+    }
+    return curResult;
+}
 }

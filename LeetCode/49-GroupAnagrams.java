@@ -1,4 +1,5 @@
 class Solution {
+    //O(n*klog(k)) where k is the average length of the words and 'n' is number of words
     public List<List<String>> groupAnagrams(String[] strs) {
         if (strs == null || strs.length == 0){
             return new ArrayList<List<String>>();

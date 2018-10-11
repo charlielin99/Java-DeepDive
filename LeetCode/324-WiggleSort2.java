@@ -1,4 +1,7 @@
 class Solution {
+    
+    //time o(n)
+    //space o(1)
    public void wiggleSort(int[] nums) {
        
         // After you get median element, the 'nums' is partially sorted such that the first half is 

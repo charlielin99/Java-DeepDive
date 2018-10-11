@@ -36,6 +36,12 @@ public class Solution {
                 path.add(s.substring(pos,i+1));
                 helper(res, path, dp, s, i+1);
                 path.remove(path.size()-1);
+                /*
+         tempList is a temporary list to hold the values while we traverse the recursion tree path. 
+         As we backtrack, we remove the last inserted value so that we can reuse the tempList 
+         for the next recursion call. At any node in the recursion tree, 
+         tempList "remembers" the path up to that node.
+                */
             }
         }
     }

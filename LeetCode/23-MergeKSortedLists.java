@@ -7,7 +7,9 @@
  * }
  */
 
+//  If you do not use PQ, the complexity will be O(n^2), since you need O(n) time to get the lowest head every time.
 // O(nlgk) where n is total nodes in all lists and k is number of lists
+// min heap to keep track of lowest head at each merge
 
 public class Solution {
     public ListNode mergeKLists(ListNode[] lists) {  

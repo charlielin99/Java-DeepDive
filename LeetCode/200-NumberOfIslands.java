@@ -1,4 +1,8 @@
 class Solution {
+    
+    //time: O(n*m) because we are "sinking surrounding islands"
+    //space: O(m*n). At most you end up visiting all the nodes twice.
+    
     public int numIslands(char[][] grid) {
         int count = 0;
         

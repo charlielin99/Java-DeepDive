@@ -1,6 +1,8 @@
 class Solution {
 
 //Idea is simple. Build a array of list to be buckets with length 1 to sort.
+    // time o(n)
+    // space o(n)
 
 public List<Integer> topKFrequent(int[] nums, int k) {
 

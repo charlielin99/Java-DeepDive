@@ -15,31 +15,36 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+
+/*
+The recursive part is O(n), because T(n)=2T(n/2)+O(1). And in each recursive call, faster pointer traverse full list of logn, which leads to O(nlogn). So the total Time Complexity is O(nlogn)
+
+space: o(n) for recursive calls
+
+*/
+
 class Solution {
-    public TreeNode sortedListToBST(ListNode head) {
-        if (head == null){
-            return null;
-        }
-        return toBST(head, null);
+public TreeNode sortedListToBST(ListNode head) {
+    return sortedListToBST(head, null);
+}
+
+private TreeNode sortedListToBST(ListNode start, ListNode end) {
+
+    if (start == null || start == end)
+        return null;
+
+    ListNode fast = start;
+    ListNode slow = start;
+
+    while (fast.next != end && fast.next.next != end) {
+        fast = fast.next.next;
+        slow = slow.next;
     }
     
-    public TreeNode toBST(ListNode head, ListNode tail){
-        
-        ListNode fast = head;
-        ListNode slow = head;
-        
-        if (head == tail){
-            return null;
-        }
-        
-        while (fast != tail && fast.next != tail){
-            fast = fast.next.next;
-            slow = slow.next;
-        }
-        
-        TreeNode thead = new TreeNode(slow.val);
-        thead.left = toBST(head, slow);
-        thead.right = toBST(slow.next, tail);
-        return thead;
-    }
+    TreeNode root = new TreeNode(slow.val);
+    root.left = sortedListToBST(start, slow);
+    root.right = sortedListToBST(slow.next, end);
+
+    return root;
+}
 }

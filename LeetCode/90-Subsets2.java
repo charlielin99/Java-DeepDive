@@ -1,28 +1,29 @@
-class Solution {
-public List<List<Integer>> subsetsWithDup(int[] num) {
-    Arrays.sort(num);
-    List<List<Integer>> ans = new ArrayList<List<Integer>>();
-    int len = num.length;
-    if (len == 0) return ans; 
+public class Solution {
+    //o(2^n) time
+    //o(n) space
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res = new ArrayList<>();
+        subsetsWithDupHelper(nums, 0, res, new ArrayList<>());
+        return res;
+    }
     
-    ans.add(new ArrayList<Integer>()); // first, need to add the subset of num[0]
-    ans.add(new ArrayList<Integer>());
-    ans.get(1).add(num[0]);
-    
-    int nprev = 1; // this is the number of lists that the previous number was added in.
-                 // if the current number is same as the prev one, it'll be only added in the 
-                // lists that has the prev number.
-                
-    for (int i = 1; i < len ; ++i){
-        int size = ans.size();
-        if (num[i]!=num[i-1])   // if different
-            nprev = size;        // this means add num[i] to all lists in ans;
-        for (int j = size-nprev; j < size; ++j){
-            List<Integer> l = new ArrayList<Integer>(ans.get(j));
-            l.add(num[i]);
-            ans.add(l);
+    private void subsetsWithDupHelper(int[] nums, int pos, List<List<Integer>> res, List<Integer> tmpRes) {
+        // subset means it does not need contain all elements, so the condition is <= rather than ==
+        // and do not return after this statement
+        if(pos <= nums.length) res.add(new ArrayList<>(tmpRes));
+        
+        for(int i=pos; i<nums.length; i++) {
+            if(i > pos && nums[i] == nums[i-1]) continue;   // avoid duplicates
+            tmpRes.add(nums[i]);
+            subsetsWithDupHelper(nums, i + 1, res, tmpRes);
+            tmpRes.remove(tmpRes.size() - 1);
+            /*
+         tempList is a temporary list to hold the values while we traverse the recursion tree path. 
+         As we backtrack, we remove the last inserted value so that we can reuse the tempList 
+         for the next recursion call. At any node in the recursion tree, 
+         tempList "remembers" the path up to that node.
+         */
         }
     }
-    return ans;
-}
 }

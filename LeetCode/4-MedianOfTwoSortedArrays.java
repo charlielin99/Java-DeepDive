@@ -33,7 +33,7 @@ the same solution can be applied to find kth element of 2 sorted arrays.
         // if (n+m) is odd, the median is the larger one between A[l-1] and B[k-l].
         // and there are some corner cases we need to take care of.
         int a = Math.max(l > 0 ? A[l - 1] : Integer.MIN_VALUE, k - l >= 0 ? B[k - l] : Integer.MIN_VALUE);
-        if (((n + m) & 1) == 1)
+        if (((n + m) % 2) == 1)
             return (double) a;
 
         // if (n+m) is even, the median can be calculated by 

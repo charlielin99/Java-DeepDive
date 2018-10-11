@@ -1,19 +1,13 @@
 class TrieNode {
-    public char val;
     public boolean isWord; 
     public TrieNode[] children = new TrieNode[26];
     public TrieNode() {}
-    TrieNode(char c){
-        TrieNode node = new TrieNode();
-        node.val = c;
-    }
 }
 
 public class Trie {
     private TrieNode root;
     public Trie() {
         root = new TrieNode();
-        root.val = ' ';
     }
 
     public void insert(String word) {
@@ -21,7 +15,7 @@ public class Trie {
         for(int i = 0; i < word.length(); i++){
             char c = word.charAt(i);
             if(ws.children[c - 'a'] == null){
-                ws.children[c - 'a'] = new TrieNode(c);
+                ws.children[c - 'a'] = new TrieNode();
             }
             ws = ws.children[c - 'a'];
         }

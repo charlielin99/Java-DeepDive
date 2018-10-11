@@ -1,4 +1,11 @@
 class Solution {
+
+/*
+Time: O(N)
+Space: O(N)
+Stack solution
+*/
+
 public int[] dailyTemperatures(int[] temperatures) {
     Stack<Integer> stack = new Stack<>();
     int[] ret = new int[temperatures.length];

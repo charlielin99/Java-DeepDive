@@ -1,4 +1,11 @@
 class Solution {
+    // straightforward solution is to use a 2 pass counting sort
+    // this will take o(n) space though
+    
+    // here is a one pass in constant space!
+    // 1-pass is essentially the 3-way quick partition method in quicksort
+    // o(n) time
+    // there are only 3 elements so 3 way partition works perfectly
     
     /*
     quicksort 3-way partition

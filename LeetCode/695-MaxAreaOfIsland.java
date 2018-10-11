@@ -1,4 +1,6 @@
 class Solution {
+    // time: o(m*n)
+    // space: o(m*n) for bfs
     public int maxAreaOfIsland(int[][] grid) {
         int max = 0;
         for (int i=0; i<grid.length; i++){

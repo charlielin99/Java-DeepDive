@@ -16,25 +16,46 @@ public class Solution {
             this.value = value;
         }
     }
-
+    
     public static LinkedListNode reverse(LinkedListNode headOfList) {
 
         // reverse the linked list in place
-        LinkedListNode currentNode = headOfList;
-        LinkedListNode previousNode = null;
+        LinkedListNode current = headOfList;
+        LinkedListNode previous = null;
         LinkedListNode nextNode = null;
         
-        while (currentNode != null){
-            nextNode = currentNode.next;
-            currentNode.next = previousNode;
+        while (current!= null){
+            nextNode = current.next;
+            current.next = previous;
             
-            previousNode = currentNode;
-            currentNode = nextNode;
+            previous = current;
+            current = nextNode;
         }
-
-        return previousNode;
+        
+        return previous;
     }
-
+    
+    
+    /*
+    RECURSIVE
+    public static LinkedListNode reverse(LinkedListNode headOfList) {
+        if (headOfList == null){
+            return headOfList;
+        }
+        return reverse(headOfList, null);
+    }
+    
+    public static LinkedListNode reverse(LinkedListNode head, LinkedListNode tail){
+        LinkedListNode temp = head.next;
+        head.next = tail;
+        tail = head;
+        if (temp == null){
+            return head;
+        }
+        head = temp;
+        return reverse(head, tail);
+    }
+    */
 
 
 
@@ -101,7 +122,7 @@ public class Solution {
             list = list.next;
             i--;
         }
-        return list == null;
+        return list == null && i == -1;
     }
 
     public static void main(String[] args) {

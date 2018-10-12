@@ -1,4 +1,8 @@
 /*
+
+https://leetcode.com/articles/kill-process/
+
+
 Approach #3 HashMap + Depth First Search [Accepted]
 
 Instead of making the tree structure, we can directly make use of a data structure which stores a particular process value and the list of its direct children. For this, in the current implementation, we make use of a hashmap mapmap, which stores the data in the form {parent: [list of all its direct children]}parent:[listofallitsdirectchildren].

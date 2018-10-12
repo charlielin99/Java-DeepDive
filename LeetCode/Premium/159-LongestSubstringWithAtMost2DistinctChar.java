@@ -1,3 +1,7 @@
+//Use window method, counter to track distinct character, when counter > 2, 
+//remove one distinct character(till count = 0) to track next substring.
+//https://www.programcreek.com/2013/02/longest-substring-which-contains-2-unique-characters/
+
 public int lengthOfLongestSubstringTwoDistinct(String s) {
     int max=0;
     HashMap<Character,Integer> map = new HashMap<Character, Integer>();

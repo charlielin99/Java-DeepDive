@@ -14,6 +14,17 @@ public class Main {
         wordsWithSameCharSet(words);
     }
 
+    /*
+    The idea is to use hashing. We generate a key for all words. 
+    The key contains all unique character (Size of key is at most 26 for lower case alphabets). 
+    We store indexes of words as values for a key. Once we have filled all keys and values in 
+    hash table, we can print the result by traversing the table.
+
+
+    Time complexity : O(n*k) where n is number of words in dictionary and k is maximum length of a word.
+
+    */
+
     public static void wordsWithSameCharSet(String[] words){
        int n = words.length;
 

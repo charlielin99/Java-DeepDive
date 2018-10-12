@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
-Given two strings s1 and s2, write a function to return true if s2 contains the permutation of s1.
-In other words, one of the first string's permutations is the substring of the second string.
+Given two strings s1 and s2, write a function to return true if s2 contains the anagram of s1.
+In other words, one of the first string's anagram is the substring of the second string.
  */
 
 public class Main {

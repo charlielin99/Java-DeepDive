@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/permutationInString.iml" filepath="$PROJECT_DIR$/permutationInString.iml" />
+      <module fileurl="file://$PROJECT_DIR$/anagramInString.iml" filepath="$PROJECT_DIR$/anagramInString.iml" />
     </modules>
   </component>
 </project>

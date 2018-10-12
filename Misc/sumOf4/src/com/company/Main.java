@@ -38,6 +38,18 @@ public class Main {
         }
     }
 
+    /*
+    both time and space should be O(n^2)
+    basically you have a hashset of all combinations of twosums
+    and you run the combination again and see if you can get a foursum match,
+    but you gotta make sure that there are no elements counted twice
+
+    there's that checkEqual method in the Pair class that returns true if any index is duplicated,
+    in which case we throw away the result
+
+    you are throwing in any combination of two element so space o(n^2)
+    */
+
     public static boolean isFourSum(int[] arr, int target) {
         HashMap<Integer, HashSet<Pair>> map = new HashMap<Integer, HashSet<Pair>>();
 

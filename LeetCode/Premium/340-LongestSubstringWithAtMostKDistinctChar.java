@@ -1,3 +1,6 @@
+//Time is O(n).
+//https://www.programcreek.com/2013/02/longest-substring-which-contains-2-unique-characters/
+
 public int lengthOfLongestSubstringKDistinct(String s, int k) {
     if(k==0 || s==null || s.length()==0)
         return 0;

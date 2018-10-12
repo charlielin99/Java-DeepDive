@@ -1,56 +1,44 @@
-public class Solution {
-    public int[] sortTransformedArray(int[] nums, int a, int b, int c) {
-    	if (nums.length() == 0 || nums == null){
-    		return nums;
-    	}
-    	if (nums.length() == 1){
-    		nums[0] = calculate(nums[0], a, b, c);
-    		return nums;
-     	}
+/*
+We know that the transformation function forms a parabola, 
+which has a minimum/maximum in the middle, if a != 0, or a line, if a == 0. 
+So we can start from two ends, for a > 0, fill the result array from end to start, 
+for a < 0, fill the result array from start to end.
 
-     	int l = 0;
-     	int r = nums.length - 1;
-     	int k = 0;
-     	int[] result = new int[nums.length];
+Time O(n)
+*/
 
-     	while (l <= r){
-     		int v1 = calculate(nums[l], a, b, c);
-     		int v2 = calculate(nums[r], a, b, c);
-
-     		if (a > 0){
-     			result[k++] = v1 > v2 ? v1 : v2;
-     			if (v1 > v2){
-     				l++;
-     			} else {
-     				r--;
-     			}
-     		} else {
-     			result[k++] = v1 > v2 ? v2 : v1;
-     			if (v1 > v2){
-     				r--;
-     			} else {
-     				l++;
-     			}
-     		}
-     	}
-
-     	if (a > 0){
-     		int left = 0;
-     		int right = result.length - 1;
-     		while (left < right){
-     			int temp = result[left];
-     			result[left] = result[right];
-     			result[right] = temp;
-     			left++;
-     			right--;
-     		}
-     	}
-
-     	return result;
-	}
-
-	public int calculate(int x, int a, int b, int c){
-		int result = a * (x * x) + b*x + c;
-		return result;
-	}
-}
+public int[] sortTransformedArray(int[] nums, int a, int b, int c) {
+        if (nums.length == 0) {
+            return nums;
+        }
+        int len = nums.length;
+        int[] rst = new int[len];
+        int pos1 = 0, pos2 = len - 1;
+        int start = 0, end = len - 1;
+        while (start <= end) {
+            int first = calculate(nums[start], a, b, c);
+            int second = calculate(nums[end], a, b, c);
+            if (a >= 0) {
+                if (first > second) {
+                    rst[pos2--] = first;
+                    start++;
+                } else {
+                    rst[pos2--] = second;
+                    end--;
+                }
+            } else {
+                if (first < second) {
+                    rst[pos1++] = first;
+                    start++;
+                } else {
+                    rst[pos1++] = second;
+                    end--;
+                }
+            }
+        }
+        return rst;
+    }
+ 
+    private int calculate(int x, int a, int b, int c) {
+        return a * x * x + b * x + c;
+    }

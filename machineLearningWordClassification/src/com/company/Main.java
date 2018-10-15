@@ -1,7 +1,9 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Main {
 
@@ -15,6 +17,7 @@ public class Main {
 
     public static class Trie {
         private TrieNode root;
+        private Set<String> memo = new HashSet<>();
         public Trie() {
             root = new TrieNode();
         }
@@ -23,7 +26,10 @@ public class Main {
             for (String s: dict){
                 List<String> subsets = generateSubsets(s);
                 for (String sub: subsets){
-                    insert(sub);
+                    if (!memo.contains(sub)){
+                        insert(sub);
+                        memo.add(sub);
+                    }
                 }
             }
         }

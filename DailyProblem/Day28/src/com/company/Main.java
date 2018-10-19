@@ -61,17 +61,20 @@ public class Main {
         }
 
 
+        // justfiyText starts here
+
         List<String> ret = new ArrayList<String>();
 
-        int listStartCounter = 0;
-        int listEndCounter;
+        // 2 pointers
+        int listStartIndex = 0;
+        int listEndIndex;
 
 
         do {
-            listEndCounter = listStartCounter;
+            listEndIndex = listStartIndex;
             int remainingIndex = k;
             int timesAppended = 0;
-            for (int i=listStartCounter; i < dict.size() && remainingIndex >= dict.get(i).length(); i++){
+            for (int i=listStartIndex; i < dict.size() && remainingIndex >= dict.get(i).length(); i++){
                 timesAppended++;
                 remainingIndex -= dict.get(i).length();
                 remainingIndex --; //account for space between words
@@ -79,35 +82,35 @@ public class Main {
 
             remainingIndex++; //after last word there should not be a space
 
-            listEndCounter += timesAppended - 1;
+            listEndIndex += timesAppended - 1; // set end pointer for this iteration of stringbuilder
 
             StringBuilder sBuilder = new StringBuilder();
 
-            if (remainingIndex != 0){ // need to add spacing
-                int spaces = (remainingIndex / (timesAppended-1)) + 1;
-                int spaceOffset = remainingIndex % (timesAppended-1);
-                for (int i=listStartCounter; i<listEndCounter; i++){
+            if (remainingIndex != 0){ // need to add additional spacing
+                int spaces = (remainingIndex / (timesAppended-1)) + 1; // +1 because all words need at least one space
+                int spaceOffsetCount = remainingIndex % (timesAppended-1); // how many words have additional spacing
+                for (int i=listStartIndex; i<listEndIndex; i++){
                     sBuilder.append(dict.get(i));
-                    if (spaceOffset > 0){
-                        helper(sBuilder, spaces+1);
-                        spaceOffset--;
+                    if (spaceOffsetCount > 0){ // while the spaceOffsetCount is still more than 1, add an additional space
+                        helper(sBuilder, spaces+1); // + 1 is that additional space because of spaceOffsetCount
+                        spaceOffsetCount--;
                     } else {
                         helper(sBuilder, spaces);
                     }
                 }
-                //last word append
-                sBuilder.append(dict.get(listEndCounter));
-            } else {
-                sBuilder.append(dict.get(listStartCounter));
-                for (int i=1; i<=listEndCounter-listStartCounter; i++){
+                //last word append out of loop because there should not be space after it
+                sBuilder.append(dict.get(listEndIndex));
+            } else { // regular spacing
+                sBuilder.append(dict.get(listStartIndex));
+                for (int i=1; i<=listEndIndex-listStartIndex; i++){
                     sBuilder.append(' ');
                     sBuilder.append(dict.get(i));
                 }
             }
 
             ret.add(sBuilder.toString());
-            listStartCounter = listEndCounter + 1;
-        } while (listEndCounter != dict.size()-1);
+            listStartIndex = listEndIndex + 1;
+        } while (listEndIndex != dict.size()-1);
 
         return ret;
     }

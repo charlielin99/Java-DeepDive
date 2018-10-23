@@ -120,4 +120,68 @@ public class Main {
             sBuilder.append(' ');
         }
     }
+
+
+
+
+
+
+
+
+
+    public static List<String> justifyText2(List<String> dict, int k) {
+        List<String> ret = new ArrayList<>();
+        List<String> temp = new ArrayList<>();
+        int currCharLeft = k;
+
+        for (String currWord : dict) {
+            currCharLeft -= currWord.length();
+            if (!temp.isEmpty()) currCharLeft--;
+            temp.add(currWord);
+            if (currWord.length() >= currCharLeft) {
+                ret.add(tempListToString(temp, k));
+                temp = new ArrayList<>();
+                currCharLeft = k;
+            }
+        }
+        if (!temp.isEmpty()) {
+            ret.add(tempListToString(temp, k));
+        }
+
+        return ret;
+    }
+
+    private static String tempListToString(List<String> stringList, int k) {
+        StringBuilder builder = new StringBuilder();
+
+        int spaceLength = k;
+        for (String word : stringList) spaceLength -= word.length();
+
+        if (stringList.size() == 0){
+            return "";
+        } else if (stringList.size() == 1) {
+            builder.append(stringList.get(0));
+            for(int i = 0; i < spaceLength; i++) {
+                builder.append('^');
+            }
+        } else {
+            int betweenLength = spaceLength / (stringList.size() - 1);
+            int wordsWithExtraSpaces = spaceLength % (stringList.size() - 1);
+            builder.append(stringList.get(0));
+            for (int j = 1; j <= wordsWithExtraSpaces; j++) {
+                for(int i = 0; i < betweenLength + 1; i++) {
+                    builder.append('^');
+                }
+                builder.append(stringList.get(j));
+            }
+            for (int j = wordsWithExtraSpaces + 1; j < stringList.size(); j++) {
+                for(int i = 0; i < betweenLength; i++) {
+                    builder.append('^');
+                }
+                builder.append(stringList.get(j));
+            }
+        }
+
+        return builder.toString();
+    }
 }

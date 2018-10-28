@@ -13,9 +13,43 @@ get_last(i): gets the ith last element from the log. i is guaranteed to be small
 You should be as efficient with time and space as possible.
  */
 
+
+// Circular array
+// Append and access like a normal array except everything is mod n
+// And when you access add an offset
+
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+	    CircularArray cir = new CircularArray(6);
+	    cir.record(1);
+	    cir.record(2);
+	    cir.record(3);
+	    cir.record(4);
+	    cir.record(5);
+	    cir.record(6);
+	    cir.record(20);
+
+        System.out.println(cir.get_last(1));
+    }
+
+    private static class CircularArray {
+        int[] arr;
+        int arrCounter;
+
+        CircularArray(int n){
+            arr = new int[n];
+            arrCounter = 0;
+        }
+
+        void record (int order_id){
+            arr[arrCounter++ % arr.length] = order_id;
+        }
+
+        int get_last (int i){
+            int access = arrCounter - i;
+            return arr[access % arr.length];
+        }
     }
 }

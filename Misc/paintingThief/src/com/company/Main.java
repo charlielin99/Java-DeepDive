@@ -38,66 +38,50 @@ public class Main {
         }));
     }
 
+
     public static boolean hasWays(int r, int c, int[][] map) {
-
-        //System.out.println(map[r][c]);
-
         Deque<Integer> xStack = new ArrayDeque<>();
         Deque<Integer> yStack = new ArrayDeque<>();
         Deque<Integer> pointStack = new ArrayDeque<>();
-        Deque<Integer> heightStack = new ArrayDeque<>();
-
 
         //xStack and yStack are x y values
         //pointStack are the min alarm value so far (that's to be decreased)
-        //heightStack are numbers of steps taken so far
-
 
         int xL = map.length, yL = map[0].length;
-
-        int currX = 0, currY = 0, currPoint = map[0][0], currHeight = 0;
+        int currX = 0, currY = 0, currPoint = map[0][0] + 1;
 
         xStack.push(currX);
         yStack.push(currY);
         pointStack.push(currPoint);
-        heightStack.push(currHeight);
 
-        while(!pointStack.isEmpty()) {
+        while (!pointStack.isEmpty()) {
             currX = xStack.pop();
             currY = yStack.pop();
             currPoint = pointStack.pop();
-            currHeight = heightStack.pop();
 
-
-            if (currX < 0 || currX >= xL || currY < 0 || currY >= yL || currPoint < 0) {
+            if (currX < 0 || currX >= xL || currY < 0 || currY >= yL || currPoint <= 0)
                 continue;
-            }
 
-            if (currX == r && currY == c) {
+            currPoint = Math.min(map[currX][currY], currPoint - 1);
+
+            if (currX == r && currY == c && currPoint > 0)
                 return true;
-            }
-
-            currPoint = Math.min(map[currX][currY] - currHeight, currPoint) - 1;
-
-            xStack.push(currX + 1);
-            yStack.push(currY);
-            pointStack.push(currPoint);
-            heightStack.push(currHeight + 1);
 
             xStack.push(currX - 1);
             yStack.push(currY);
             pointStack.push(currPoint);
-            heightStack.push(currHeight + 1);
-
-            xStack.push(currX);
-            yStack.push(currY + 1);
-            pointStack.push(currPoint);
-            heightStack.push(currHeight + 1);
 
             xStack.push(currX);
             yStack.push(currY - 1);
             pointStack.push(currPoint);
-            heightStack.push(currHeight + 1);
+
+            xStack.push(currX + 1);
+            yStack.push(currY);
+            pointStack.push(currPoint);
+
+            xStack.push(currX);
+            yStack.push(currY + 1);
+            pointStack.push(currPoint);
         }
 
         return false;
